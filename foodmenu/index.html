@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>food menu</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+  </head>
+  <header>
+    <h1>MUA MENU</h1>
+  </header>
+
+  <body>
+    <main>
+      <select id="category-list" onchange="loadItemList();">
+        <option value="drinks">Drinks</option>
+        <option value="entrees">Entrees</option>
+        <option value="desserts">Desserts</option>
+      </select>
+
+      <select id="menuItems" size="5"></select>
+    </main>
+    <script>
+      "use stricts";
+
+      const categoryList = document.querySelector("#category-list");
+      const menuItems = document.querySelector("#menuItems");
+
+      let menu = {
+        drinks: ["Water", "Tea", "Sweet Tea", "Coke", "Dr. Pepper", "Sprite"],
+        entrees: [
+          "Hamburger w/ Fries",
+          "Grilled Cheese w/ Tater Tots",
+          "Grilled Chicken w/ Veggies",
+          "Chicken Fried Steak w/ Mashed Potatoes",
+          "Fried Shrimp w/ Coleslaw",
+          "Veggie Plate",
+        ],
+        desserts: ["Cheesecake", "Chocolate Cake", "Snickerdoodle Cookie"],
+      };
+
+      let selectedMenuOption = document.createElement("option");
+      selectedMenuOption.value = " ";
+      selectedMenuOption.textContent = "Select Option...";
+      menuItems.appendChild(selectedMenuOption);
+
+      function loadItemList() {
+        switch (categoryList.value) {
+          case "desserts":
+            displayMenuItems(menu.desserts);
+            break;
+          case "drinks":
+            displayMenuItems(menu.drinks);
+            break;
+          case "entrees":
+            displayMenuItems(menu.entrees);
+            break;
+        }
+      }
+
+      function displayMenuItems(menuItemList) {
+        menuItems.innerHTML = "";
+        for (const item of menuItemList) {
+          const menuOptions = new Option(item);
+          menuItems.appendChild(menuOptions);
+        }
+      }
+    </script>
+  </body>
+</html>
